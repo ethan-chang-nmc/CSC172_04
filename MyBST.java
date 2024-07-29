@@ -8,7 +8,6 @@
 */
 public interface MyBST <T extends Comparable<T>>
 {
-  private MyTreeNode<T> root;
   public void insert(T x);
   public void delete(T x);
   public boolean lookup(T x);
