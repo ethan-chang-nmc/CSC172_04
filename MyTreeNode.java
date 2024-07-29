@@ -36,9 +36,9 @@ public class MyTreeNode <T extends Comparable<T>>
   {
     if (node != null) 
     {
-      System.out.print(node.data + " ");
-      printPreOrderRec(node.leftchild);
-      printPreOrderRec(node.rightchild);
+      System.out.print(node.data + " "); //print out node
+      printPreOrderRec(node.leftchild); //travel down left
+      printPreOrderRec(node.rightchild); //then travel down right
     }
   }
 
@@ -47,9 +47,9 @@ public class MyTreeNode <T extends Comparable<T>>
   {
     if (node != null) 
     {
-      printInOrderRec(node.leftchild);
-      System.out.print(node.data + " ");
-      printInOrderRec(node.rightchild);
+      printInOrderRec(node.leftchild); //travel down left
+      System.out.print(node.data + " "); //print out node
+      printInOrderRec(node.rightchild); //travel down right
     }
   }
  
@@ -58,9 +58,30 @@ public class MyTreeNode <T extends Comparable<T>>
   {
     if (node != null) 
     {
-      printPostOrderRec(node.leftchild);
-      printPostOrderRec(node.rightchild);
-      System.out.print(node.data + " ");
+      printPostOrderRec(node.leftchild); //travel down left
+      printPostOrderRec(node.rightchild); //travel down right
+      System.out.print(node.data + " "); //print out node
+    }
+  }
+
+  /*recursive lookup method*/
+  private boolean lookupRec(MyTreeNode<T> node, T x) 
+  {
+    if (node == null) 
+    {
+      return false;
+    }
+    if (x.compareTo(node.data) == 0) 
+    {
+      return true;
+    } 
+    else if (x.compareTo(node.data) < 0) 
+    {
+      return lookupRec(node.leftchild, x);
+    } 
+    else 
+    {
+      return lookupRec(node.rightchild, x);
     }
   }
 }
