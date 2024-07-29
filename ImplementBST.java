@@ -6,54 +6,91 @@
 *
 *07/28/2024: Creating Binary Search Trees
 */
-public class mainBST
+public class ImplementBST<T extends Comparable<T>> implements MyBST<T>
 {
-  public static void main(String[] args) 
+  public MyTreeNode<T> root = null; //create root node
+
+  /*insert method calling on recursive insert*/
+  public void insert(T x) 
   {
-    MyBST<Integer> bst = new ImplementBST<>(); //creating new bst for testing
-    bst.insert(5);
-    bst.insert(3);
-    bst.insert(7);
-    bst.insert(2);
-    bst.insert(4);
-    bst.insert(6);
-    bst.insert(8);
-
-   System.out.print("InOrder before deletion: ");
-    bst.printInOrder();
-    System.out.println();
-    //expected Output: 2 3 4 5 6 7 8 
-
-    System.out.print("PreOrder before deletion: ");
-    bst.printPreOrder();
-    System.out.println();
-    //expected Output: 5 3 2 4 7 6 8 
-
-    System.out.print("PostOrder before deletion: ");
-    bst.printPostOrder();
-    System.out.println();
-    //expected Output: 2 4 3 6 8 7 5 
-
-    bst.delete(3); //Node with two children
-    bst.delete(7); //Node with one child
-    bst.delete(2); //Leaf node
-
-    System.out.print("InOrder after deletions: ");
-    bst.printInOrder();
-    System.out.println();
-    //expected Output: 4 5 6 8 
-
-    System.out.print("PreOrder after deletions: ");
-    bst.printPreOrder();
-    System.out.println();
-    //expected Output: 5 4 8 6 
-
-    System.out.print("PostOrder after deletions: ");
-    bst.printPostOrder();
-    System.out.println();
-    //expected Output: 4 6 8 5 
-    
-    System.out.println("Lookup 4: " + bst.lookup(4)); //expected: true 
-    System.out.println("Lookup 9: " + bst.lookup(9)); //expected: false
+    if (!lookup(x)) //only inserts if it does not already exist in BST
+    {
+      root = insertRec(root, x, null);
     }
+  }
+
+/*recursive insert method*/
+private MyTreeNode<T> insertRec(MyTreeNode<T> node, T x, MyTreeNode<T> parent) 
+{
+  if (node == null) //empty case
+  {
+    MyTreeNode<T> newNode = new MyTreeNode<>(); //create new node
+    newNode.data = x; //set node data equal to x
+    newNode.parent = parent; //set node's parent
+    return newNode;
+  }
+  if (x.compareTo(node.data) < 0) 
+  {
+    node.leftchild = insertRec(node.leftchild, x, node); //recursively call function for left side and current node as parent
+  } 
+  else if (x.compareTo(node.data) > 0) 
+  {
+    node.rightchild = insertRec(node.rightchild, x, node); //recursively call function for right side and current node as parent
+  }
+  return node; //if equal to the current node, do nothing to prevent duplicates
+}
+
+  /*PreOrder method calling on recursive PreOrder*/
+  public void printPreOrder() 
+  {
+    root.printPreOrderRec(root);
+  }
+
+  /*InOrder method calling on recursive InOrder*/
+  public void printInOrder() 
+  {
+    root.printInOrderRec(root);
+  }
+
+  /*PostOrder method calling on recursive PostOrder*/
+  public void printPostOrder() 
+  {
+    root.printPostOrderRec(root);
+  }
+
+  /*lookup method calling on recursive lookup*/
+  public boolean lookup(T x) 
+  {
+    return lookupRec(root, x);
+  }
+
+  /*recursive lookup method*/
+  private boolean lookupRec(MyTreeNode<T> node, T x) 
+  {
+    if (node == null)
+    {
+      return false; //return false if null
+    }
+    if (x.compareTo(node.data) == 0) 
+    {
+      return true; //returns true if node is found
+    } 
+    else if (x.compareTo(node.data) < 0) 
+    {
+      return lookupRec(node.leftchild, x); //continue traversing left if less than current node
+    } 
+    else 
+    {
+      return lookupRec(node.rightchild, x); //continue traversing right if greater than current node
+    }
+  }
+
+  /*delete method calling on recursive delete*/
+  public void delete(T x) 
+  {
+    if (lookup(x)) //only calls delete if x is in BST
+    {
+      root = root.deleteRec(root, x);
+    }
+  }
 }
