@@ -15,6 +15,22 @@ public class MyBSTImpl<T extends Comparable<T>> implements MyBST<T>
   {
     root = insertRec(root, x, null);
   }
-  
-  
+
+  /*PreOrder method calling on recursive PreOrder*/
+  public void printPreOrder() 
+  {
+    printPreOrderRec(root);
+  }
+
+  /*InOrder method calling on recursive InOrder*/
+  public void printInOrder() 
+  {
+    printInOrderRec(root);
+  }
+
+  /*PostOrder method calling on recursive PostOrder*/
+  public void printPostOrder() 
+  {
+    printPostOrderRec(root);
+  }
 }
