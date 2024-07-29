@@ -6,7 +6,7 @@
 *
 *07/28/2024: Creating Binary Search Trees
 */
-public class MyBSTImpl<T extends Comparable<T>> implements MyBST<T>
+public class ImplementBST<T extends Comparable<T>> implements MyBST<T>
 {
   private MyTreeNode<T> root = null; //create root node
 
