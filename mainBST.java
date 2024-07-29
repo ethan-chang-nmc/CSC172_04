@@ -10,7 +10,7 @@ public class mainBST
 {
   public static void main(String[] args) 
   {
-    MyBST<Integer> bst = new MyBSTImpl<>(); //creating new bst for testing
+    MyBST<Integer> bst = new ImplementBST<>(); //creating new bst for testing
     bst.insert(5);
     bst.insert(3);
     bst.insert(7);
