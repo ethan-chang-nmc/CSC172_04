@@ -13,7 +13,10 @@ public class MyBSTImpl<T extends Comparable<T>> implements MyBST<T>
   /*insert method calling on recursive insert*/
   public void insert(T x) 
   {
-    root = insertRec(root, x, null);
+    if (!lookup(x)) //only inserts if it does not already exist in BST
+    {
+      root = insertRec(root, x, null);
+    }
   }
 
   /*PreOrder method calling on recursive PreOrder*/
@@ -32,5 +35,20 @@ public class MyBSTImpl<T extends Comparable<T>> implements MyBST<T>
   public void printPostOrder() 
   {
     printPostOrderRec(root);
+  }
+
+  /*lookup method calling on recursive lookup*/
+  public boolean lookup(T x) 
+  {
+    return lookupRec(root, x);
+  }
+
+  /*delete method calling on recursive delete*/
+  public void delete(T x) 
+  {
+    if (lookup(x)) //only calls delete if x is in BST
+    {
+      root = deleteRec(root, x);
+    }
   }
 }
