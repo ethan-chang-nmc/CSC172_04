@@ -10,27 +10,7 @@ public class MyTreeNode <T extends Comparable<T>>
 {
   T data ;
   MyTreeNode<T> leftchild, rightchild, parent;
-
-  /*recursive insert method*/
-  public MyTreeNode<T> insertRec(MyTreeNode<T> node, T x, MyTreeNode<T> parent) 
-  {
-    if (node == null) //empty case
-    {
-      MyTreeNode<T> newNode = new MyTreeNode<>(x); //create new node
-      newNode.parent = parent; //set node's parent
-      return newNode;
-    }
-    if (x.compareTo(node.data) < 0) 
-    {
-      node.leftchild = insertRec(node.leftchild, x, node); //recursively call function for left side and current node as parent
-    } 
-    else if (x.compareTo(node.data) > 0) 
-    {
-      node.rightchild = insertRec(node.rightchild, x, node); //recursively call function for right side and current node as parent
-    }
-    return node; //if equal to the current node, do nothing to prevent duplicates
-  }
-
+  
   /*recursive PreOrder method*/
   public void printPreOrderRec(MyTreeNode<T> node) 
   {
@@ -54,7 +34,7 @@ public class MyTreeNode <T extends Comparable<T>>
   }
  
   /*recursive PostOrder method*/
-  private void printPostOrderRec(MyTreeNode<T> node) 
+  public void printPostOrderRec(MyTreeNode<T> node) 
   {
     if (node != null) 
     {
@@ -64,29 +44,9 @@ public class MyTreeNode <T extends Comparable<T>>
     }
   }
 
-  /*recursive lookup method*/
-  private boolean lookupRec(MyTreeNode<T> node, T x) 
-  {
-    if (node == null)
-    {
-      return false; //return false if null
-    }
-    if (x.compareTo(node.data) == 0) 
-    {
-      return true; //returns true if node is found
-    } 
-    else if (x.compareTo(node.data) < 0) 
-    {
-      return lookupRec(node.leftchild, x); //continue traversing left if less than current node
-    } 
-    else 
-    {
-      return lookupRec(node.rightchild, x); //continue traversing right if greater than current node
-    }
-  }
 
   /*recursive delete method*/
-  private MyTreeNode<T> deleteRec(MyTreeNode<T> node, T x) 
+  public MyTreeNode<T> deleteRec(MyTreeNode<T> node, T x) 
   {
     if (node == null) 
     {
